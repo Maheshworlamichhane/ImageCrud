@@ -1,0 +1,43 @@
+﻿@model List<ImageCrud.Models.Image>
+
+@{
+    ViewData["Title"] = "Image CRUD";
+}
+
+<h2>Images</h2>
+
+<p>
+    <a asp-action="Create">Upload New Image</a>
+</p>
+
+@if (Model.Count > 0)
+{
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var image in Model)
+            {
+                        <tr>
+                            <td>@image.Id</td>
+                            <td>@image.Name</td>
+                            <td><img src="~/uploads/@image.FileName" width="100" height="100" /></td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@image.Id">Edit</a> |
+                                <a asp-action="Delete" asp-route-id="@image.Id">Delete</a>
+                            </td>
+                        </tr>
+            }
+            </tbody>
+        </table>
+}
+else
+{
+        <p>No images found.</p>
+}
